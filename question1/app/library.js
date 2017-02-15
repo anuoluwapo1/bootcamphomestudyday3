@@ -1,64 +1,53 @@
 'use strict'
 
-Array.prototype.toTwenty =  function(){
-	this.listToSearch = [];
-	for(var value = 1; value <= 20; value++){
-		this.listToSearch.push(value);
-	}
-	return this.listToSearch;
-}
-
-
-Array.prototype.toForty = function(){
-	var twoToForty = [];
-	for(var value = 2; value <= 40; value += 2){
-		twoToForty.push(value);
-	}
-	return twoToForty;
-}
-
-Array.prototype.toOneThousand = function(){
-	var toOneThousand = [];
-	for(var value = 10; value <= 1000; value += 10){
-		toOneThousand.push(value);
-	}
-	return toOneThousand;
-}
+Array.prototype.toTwenty = require('./totwenty');
+Array.prototype.toForty = require('./toforty');
+Array.prototype.toOneThousand = require('./toonethousand');
 
 Array.prototype.search = function(itemToSearch){
-	this.listToSearch = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-	this.minIndex = 0;
-	this.maxIndex = this.listToSearch.length - 1;
-	this.midIndex = 0;
-	this.listLength = this.listToSearch.length;
-	this.count = 0
-	while(this.maxIndex >= this.minIndex){
-		this.count++;
-		if( this.maxIndex < this.minIndex){
-			this.index = -1;
+	var minIndex = 0;
+	var maxIndex = this.length - 1;
+	var midIndex = 0;
+	var search = {
+		count : 0,
+		index : -1,
+		length : this.length
+	};
+	
+	while(maxIndex >= minIndex){
+		
+		if(itemToSearch === this[0]){
+			search.index = 0;
+			return search;
+		}
+		if(itemToSearch === this[maxIndex]){
+			search.index = maxIndex;
+			return search;
+		}
+
+		if( maxIndex < minIndex){
+			search.index = -1;
+			return search;
 		}
 		else{
-			this.midIndex = Math.floor((this.minIndex + this.maxIndex) / 2);
-			if(this.listToSearch[this.midIndex] === itemToSearch){
-				this.index = this.midIndex;
+			midIndex = Math.floor((minIndex + maxIndex) / 2);
+			if(this[midIndex] === itemToSearch){
+				search.index = midIndex;
+				return search;
 				break;
 			}
 			else{
-				if(this.listToSearch[this.midIndex] > itemToSearch){
-					this.maxIndex = this.midIndex - 1;
+				if(this[midIndex] > itemToSearch){
+					maxIndex = midIndex - 1;
 				}
 				else{
-					this.minIndex = this.midIndex + 1;
+					minIndex = midIndex + 1;
 				}
 			}
 		}
+		search.count++;
 	}
+	return search;
 }
 
-/*
-const outcome = {};
-outcome.oneToTwenty  = [].toTwenty();
-outcome.twoToForty  = [].toForty();
-outcome.tenToOneThousand  = [].toOneThousand();
-*/
 module.exports = Array.prototype.search;
