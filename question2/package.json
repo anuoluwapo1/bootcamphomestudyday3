@@ -1,0 +1,22 @@
+{
+  "name": "bootcamphomestudyday3",
+  "version": "1.0.0",
+  "description": "This is the solution to the bootcamp homestudy exercises day3",
+  "main": "app/library.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jasmine tests/tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anuonifade/bootcamphomestudyday3.git"
+  },
+  "author": "Anu Onifade",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anuonifade/bootcamphomestudyday3/issues"
+  },
+  "homepage": "https://github.com/anuonifade/bootcamphomestudyday3#readme"
+}
