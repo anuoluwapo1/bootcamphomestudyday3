@@ -15,22 +15,26 @@ Array.prototype.search = function(itemToSearch){
 	};
 	
 	while(maxIndex >= minIndex){
-		
-		if(itemToSearch === this[0]){
-			search.index = 0;
+		if( maxIndex < minIndex){
+			search.index = -1;
+			return search;
+		}
+		if(itemToSearch === this[minIndex]){
+			search.index = minIndex;
 			return search;
 		}
 		if(itemToSearch === this[maxIndex]){
 			search.index = maxIndex;
 			return search;
 		}
-
-		if( maxIndex < minIndex){
-			search.index = -1;
-			return search;
-		}
+		
 		else{
 			midIndex = Math.floor((minIndex + maxIndex) / 2);
+			if(itemToSearch !== this[minIndex] && itemToSearch !== this[maxIndex])
+			{
+				minIndex++;
+				maxIndex--; 
+			}
 			if(this[midIndex] === itemToSearch){
 				search.index = midIndex;
 				return search;
